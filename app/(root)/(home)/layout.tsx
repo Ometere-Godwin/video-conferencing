@@ -1,10 +1,19 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { Metadata } from "next";
 import React, { ReactNode } from "react";
 
 interface RootLayoutProps {
   children: ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "TereSphere",
+  description: "TereSphere Video Conferencing",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
+};
 
 export default function HomeLayout({ children }: RootLayoutProps) {
   return (

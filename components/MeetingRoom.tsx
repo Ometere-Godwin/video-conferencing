@@ -24,6 +24,7 @@ import Loader from "./Loader";
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
 export default function MeetingRoom() {
+  const [layout, setLayout] = useState("speaker-left");
   const searchParams = useSearchParams();
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
@@ -31,7 +32,6 @@ export default function MeetingRoom() {
   const [showParticipant, setShowParticipant] = useState(false);
 
   if (callingState !== CallingState.JOINED) return <Loader />;
-  const [layout, setLayout] = useState("speaker-left");
 
   const CallLayout = () => {
     switch (layout) {
