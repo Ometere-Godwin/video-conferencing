@@ -88,7 +88,7 @@ export default function CallList({
             }
             title={
               (meeting as Call).state?.custom.description.substring(0, 26) ||
-              meeting.filename.substring(0, 20) ||
+              (meeting as CallRecording).filename.substring(0, 20) ||
               "No description"
             }
             date={
