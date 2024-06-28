@@ -8,6 +8,7 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/components/ui/use-toast";
 import ReactDatePicker from "react-datepicker";
 import { Textarea } from "./ui/textarea";
+import { Input } from "./ui/input";
 
 export default function MeetingTypeList() {
   const [callDetails, setCallDetails] = useState<Call>();
@@ -85,19 +86,20 @@ export default function MeetingTypeList() {
         handleClick={() => setMeetingState("isScheduleMeeting")}
       />
       <Homecard
-        image="/icons/schedule.svg"
-        title="Schedule a Meeting"
-        description="Plan your meeting"
-        className="bg-purple-1"
-        handleClick={() => setMeetingState("isScheduleMeeting")}
-      />
-      <Homecard
         image="/icons/recordings.svg"
         title="View Recordings"
         description="Meeting recordings"
         className="bg-yellow-1"
         handleClick={() => router.push("/recordings")}
       />
+      <Homecard
+        image="/icons/schedule.svg"
+        title="Join a Meeting"
+        description="Plan your meeting"
+        className="bg-purple-1"
+        handleClick={() => setMeetingState("isJoiningMeeting")}
+      />
+
       {!callDetails ? (
         <MeetingModal
           isOpen={meetingState === "isScheduleMeeting"}
@@ -156,6 +158,21 @@ export default function MeetingTypeList() {
         buttonText="Start a meeting"
         handleClick={createMeeting}
       />
+
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Join a Meeting"
+        handleClick={() => router.push(values.link)}
+      >
+        <Input
+          placeholder="Meeting Link"
+          onChange={(e) => setValues({ ...values, link: e.target.value })}
+          className="border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+      </MeetingModal>
     </section>
   );
 }
